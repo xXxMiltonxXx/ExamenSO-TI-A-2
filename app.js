@@ -1,8 +1,8 @@
 // Grupo #5
-// Jeremy Cabrera
-// Henry Córdova
-// Alan Franco
-// Pierina Peñaherrera
+// Jeremy Cabrera.
+// Henry Córdova.
+// Alan Franco.
+// Pierina Peñaherrera.
 
 const express = require('express');
 const app = express();
