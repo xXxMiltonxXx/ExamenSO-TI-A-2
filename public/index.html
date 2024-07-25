@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Reservations</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+      <h1 class="text-3xl font-bold mb-6 text-center">
+        Restaurant Reservations
+      </h1>
+      <form id="reservationForm" class="mb-6">
+        <input
+          type="text"
+          id="nameInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Customer Name"
+        />
+        <input
+          type="date"
+          id="dateInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+        />
+        <input
+          type="time"
+          id="timeInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+        />
+        <input
+          type="number"
+          id="guestsInput"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
+          placeholder="Number of Guests"
+        />
+        <button
+          type="submit"
+          class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Reservation
+        </button>
+      </form>
+      <ul id="reservationList" class="list-disc pl-5"></ul>
+    </div>
+
+    <script>
+      document
+        .getElementById("reservationForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const nameInput = document.getElementById("nameInput").value.trim();
+          const dateInput = document.getElementById("dateInput").value;
+          const timeInput = document.getElementById("timeInput").value;
+          const guestsInput = document.getElementById("guestsInput").value;
+
+          if (nameInput && dateInput && timeInput && guestsInput) {
+            const response = await fetch("/addReservation", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: nameInput,
+                date: dateInput,
+                time: timeInput,
+                guests: guestsInput,
+              }),
+            });
+
+            if (response.ok) {
+              const newReservation = document.createElement("li");
+              newReservation.textContent = `${nameInput} - ${dateInput} - ${timeInput} - ${guestsInput} guests`;
+              document
+                .getElementById("reservationList")
+                .appendChild(newReservation);
+              document.getElementById("nameInput").value = "";
+              document.getElementById("dateInput").value = "";
+              document.getElementById("timeInput").value = "";
+              document.getElementById("guestsInput").value = "";
+            } else {
+              alert("Failed to add reservation");
+            }
+          }
+        });
+
+      // Fetch and display reservations
+      async function fetchReservations() {
+        const response = await fetch("/reservations");
+        const reservations = await response.json();
+        const reservationList = document.getElementById("reservationList");
+        reservations.forEach((reservation) => {
+          const li = document.createElement("li");
+          li.textContent = `${reservation.name} - ${reservation.date} - ${reservation.time} - ${reservation.guests} guests`;
+          reservationList.appendChild(li);
+        });
+      }
+
+      fetchReservations();
+    </script>
+  </body>
+</html>
