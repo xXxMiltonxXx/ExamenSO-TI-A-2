@@ -1,9 +1,6 @@
-// Grupo #5
-// Jeremy Cabrera
-// Henry Córdova
-// Alan Franco
-// Pierina Peñaherrera
-
+// Grupo #3
+// Eivy Romero
+// Joselyn Zambrano
 const express = require('express');
 const app = express();
 const port = 3000;
