@@ -1,3 +1,8 @@
+// GRUPO #1
+// ALEJANDRO BUENO
+// LEIDY SAMANIEGO
+// ANTHONY SOLORZANO
+// MARIO SORIANO
 
 // Grupo #3
 // Eivy Romero
