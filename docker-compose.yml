@@ -11,7 +11,7 @@ services:
 
   app:
     build: .
-    container_name: node-app-examen
+    container_name: node-app-examen9-b
     ports:
       - "3000:3000"
     depends_on:
