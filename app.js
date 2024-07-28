@@ -26,6 +26,12 @@
 // Roca Cedeño
 // Jaime Ivan
 
+//GRUPO6
+//Anchundia Armas Julisa
+//Pico Arteaga Delly Gustavo
+//Manuel Antonio Intriago Segovia
+//José David Fernández Velez
+
 const express = require('express');
 const app = express();
 const port = 3000;
